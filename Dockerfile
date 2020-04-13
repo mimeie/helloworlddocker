@@ -1,20 +1,16 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-#FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-#WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-WORKDIR /src
-COPY ["helloworlddocker.csproj", ""]
-RUN dotnet restore "./helloworlddocker.csproj"
+# copy csproj and restore as distinct layers
+COPY *.csproj .
+RUN dotnet restore
+
+# copy and publish app and libraries
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "helloworlddocker.csproj" -c Release -o /app/build
+RUN dotnet publish -c release -o /app --no-restore
 
-FROM build AS publish
-RUN dotnet publish "helloworlddocker.csproj" -c Release -o /app/publish
-
-FROM base AS final
+# final stage/image
+FROM mcr.microsoft.com/dotnet/core/runtime:3.1
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "helloworlddocker.dll"]
+COPY --from=build /app .
+ENTRYPOINT ["./dotnetapp"]
