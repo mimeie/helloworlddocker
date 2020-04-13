@@ -14,7 +14,7 @@ RUN dotnet build "helloworlddocker.csproj" -c Release -o /app/build
 FROM build AS publish
 RUN dotnet publish "helloworlddocker.csproj" -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/core/runtime:3.1
+FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "helloworlddocker.dll"]
