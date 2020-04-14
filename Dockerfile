@@ -1,7 +1,7 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201-buster-arm64v8 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.201-buster AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
@@ -13,7 +13,7 @@ COPY . .
 RUN dotnet publish -c release -o /app --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/core/runtime:3.1.3-buster-slim-arm64v8
+FROM mcr.microsoft.com/dotnet/core/runtime:3.1.3-buster-slim
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "helloworlddocker.dll"]
