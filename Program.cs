@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Net;
 
 namespace helloworlddocker
 {
@@ -9,6 +11,16 @@ namespace helloworlddocker
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("starte weblistener");
+
+            Task.Run(() =>
+            {
+                Console.WriteLine("starte weblistener gestartet");
+                SimpleListenerExample();
+            });
+
+            Console.WriteLine("laufe weiter");
+
             bool always = true;
             while (always == true) {
                 Console.WriteLine("Hello World, Windows (dauernd from k3s 4) !!!");
@@ -27,6 +39,42 @@ namespace helloworlddocker
             
 
         }
+
+        public static void SimpleListenerExample()
+        {
+            var web = new HttpListener();
+
+            web.Prefixes.Add("http://localhost:9001/");
+
+            Console.WriteLine("Listening..");
+
+            web.Start();
+
+            //Console.WriteLine(web.GetContext());
+
+            var context = web.GetContext();
+
+            var response = context.Response;
+
+            const string responseString = "<html><body>Hello world from k3s</body></html>";
+
+            var buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+
+            response.ContentLength64 = buffer.Length;
+
+            var output = response.OutputStream;
+
+            output.Write(buffer, 0, buffer.Length);
+
+            Console.WriteLine(output);
+
+            output.Close();
+
+            web.Stop();
+
+            Console.ReadKey();
+        }
+
 
         public static void ComplexPing(string address)
         {
