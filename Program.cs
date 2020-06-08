@@ -22,7 +22,7 @@ namespace helloworlddocker
 
                 ComplexPing("jmaster1.mei.local");
 
-                Thread.Sleep(20000);
+                Thread.Sleep(60000);
             }
             
 
