@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace helloworlddocker
 {
@@ -6,12 +7,13 @@ namespace helloworlddocker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World, Windows (1 from k3s) !!!");
+            bool always = true;
+            while (always == true) {
+                Console.WriteLine("Hello World, Windows (dauernd from k3s) !!!");
+                Thread.Sleep(10000);
+            }
+            
 
-
-            Console.WriteLine("Hello World, Windows (2 from k3s) !!!");
-
-            Console.WriteLine("Hello World, Windows (3 from k3s) !!!");
         }
     }
 }
