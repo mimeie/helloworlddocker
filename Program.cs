@@ -6,7 +6,7 @@ namespace helloworlddocker
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World, Windows !!!");
+            Console.WriteLine("Hello World, Windows (from k3s) !!!");
         }
     }
 }
