@@ -9,7 +9,7 @@ namespace helloworlddocker
         {
             bool always = true;
             while (always == true) {
-                Console.WriteLine("Hello World, Windows (dauernd from k3s) !!!");
+                Console.WriteLine("Hello World, Windows (dauernd from k3s 2) !!!");
                 Thread.Sleep(10000);
             }
             
