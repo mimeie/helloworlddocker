@@ -15,8 +15,19 @@ namespace helloworlddocker
 
             Task.Run(() =>
             {
+            try
+            {
                 Console.WriteLine("starte weblistener gestartet");
                 SimpleListenerExample();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error listener: {0}", ex.InnerException);
+                }
+                finally
+                {
+                    Console.WriteLine("--------------------------------------------------");
+                }
             });
 
             Console.WriteLine("laufe weiter");
@@ -46,7 +57,7 @@ namespace helloworlddocker
             var web = new HttpListener();
 
             Console.WriteLine("HttpListener");
-            web.Prefixes.Add("http://localhost:80");
+            web.Prefixes.Add("http://localhost:9001");
 
             Console.WriteLine("Listening..");
 
