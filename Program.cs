@@ -23,7 +23,7 @@ namespace helloworlddocker
 
             bool always = true;
             while (always == true) {
-                Console.WriteLine("Hello World, Windows (dauernd from k3s 4) !!!");
+                Console.WriteLine("Hello World, Windows (dauernd from k3s 5) !!!");
 
                 ComplexPing("8.8.8.8");
                 ComplexPing("google.ch");
@@ -56,7 +56,7 @@ namespace helloworlddocker
 
             var response = context.Response;
 
-            const string responseString = "<html><body>Hello world from k3s</body></html>";
+            const string responseString = "<html><body>Hello world from k3s 2</body></html>";
 
             var buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
 
