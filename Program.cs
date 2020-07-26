@@ -42,8 +42,10 @@ namespace helloworlddocker
 
         public static void SimpleListenerExample()
         {
+            Console.WriteLine("drin in funktion");
             var web = new HttpListener();
 
+            Console.WriteLine("HttpListener");
             web.Prefixes.Add("http://localhost:80");
 
             Console.WriteLine("Listening..");
